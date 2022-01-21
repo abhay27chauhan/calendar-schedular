@@ -1,0 +1,29 @@
+@import "styles/variables";
+
+.header {
+  padding: 10px 20px;
+  font-size: 26px;
+  font-family: sans-serif;
+  display: flex;
+  justify-content: space-between;
+  color: $text-dark-gray;
+
+  .monthDisplay {
+    span {
+      font-weight: bold;
+      color: $text-black;
+    }
+  }
+}
+
+.weekdays {
+  padding: 0px 20px;
+  display: flex;
+  margin-bottom: 10px;
+
+  div {
+    width: calc(( 100vw - 40px )/7);
+    padding: 10px;
+    font-weight: bold;
+  }
+}
