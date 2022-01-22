@@ -35,7 +35,7 @@ export function generateDates(weekdays, nav, daysArr, events, setPadding) {
           i - paddingDays === day && new Date().getMonth() === month,
         date: dayString,
       });
-    } else if (i < paddingDays && setPadding) {
+    } else if (i <= paddingDays && setPadding) {
       daysArr.push({
         value: "padding",
         event: null,

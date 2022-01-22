@@ -14,7 +14,7 @@ const App = () => {
   useFetch(url);
   const [clicked, setClicked] = useState();
   const [events, setEvents] = useState([]);
-  const { days, dateDisplay, setDays } = useDate(events);
+  const { days, dateDisplay, padding, setDays, setPadding } = useDate(events);
 
   const top = useRef(-1);
   const bottom = useRef(1);
@@ -25,7 +25,11 @@ const App = () => {
     entries.forEach((element) => {
       if (element.isIntersecting) {
         top.current = top.current - 1;
-        console.log(top.current);
+        let daysArr = [];
+        let removePadding = days.slice(padding);
+        generateDates(weekdays, top.current, daysArr, events, setPadding);
+        const totalDaysArr = [...daysArr, ...removePadding];
+        setDays(totalDaysArr);
       }
     });
   };
@@ -35,10 +39,8 @@ const App = () => {
       if (element.isIntersecting) {
         bottom.current = bottom.current + 1;
         let daysArr = [];
-        console.log(bottom.current);
         generateDates(weekdays, bottom.current, daysArr, events);
         const totalDaysArr = [...days, ...daysArr];
-        console.log(totalDaysArr);
         setDays(totalDaysArr);
       }
     });
@@ -79,7 +81,7 @@ const App = () => {
         <div className="calendar">
           {days.map((d, index) => (
             <Day
-              key={index}
+              key={d.date ? d.date : index}
               day={d}
               onClick={() => {
                 if (d.value !== "padding") {
