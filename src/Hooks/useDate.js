@@ -18,20 +18,9 @@ export const useDate = (events) => {
 
     const daysArr = [];
 
-    generateDates(
-      weekdays,
-      dt.setMonth(new Date().getMonth() - 1),
-      daysArr,
-      events,
-      setPadding,
-    );
-    generateDates(weekdays, new Date(), daysArr, events);
-    generateDates(
-      weekdays,
-      new Date().setMonth(new Date().getMonth() + 1),
-      daysArr,
-      events,
-    );
+    generateDates(weekdays, -1, daysArr, events, setPadding);
+    generateDates(weekdays, 0, daysArr, events);
+    generateDates(weekdays, 1, daysArr, events);
 
     setDays(daysArr);
   }, [events]);

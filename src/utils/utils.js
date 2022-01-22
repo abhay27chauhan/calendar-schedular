@@ -1,8 +1,11 @@
 export const eventForDate = (date, events) =>
   events.find((e) => e.date === date);
 
-export function generateDates(weekdays, date, daysArr, events, setPadding) {
-  date = new Date(date);
+export function generateDates(weekdays, nav, daysArr, events, setPadding) {
+  const date = new Date();
+  if (nav !== 0) {
+    date.setMonth(new Date().getMonth() + nav);
+  }
   const day = date.getDate();
   const month = date.getMonth();
   const year = date.getFullYear();
