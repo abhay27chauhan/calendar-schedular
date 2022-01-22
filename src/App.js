@@ -14,7 +14,8 @@ const App = () => {
   useFetch(url);
   const [clicked, setClicked] = useState();
   const [events, setEvents] = useState([]);
-  const { days, dateDisplay, padding, setDays, setPadding } = useDate(events);
+  const { days, dateDisplay, padding, setDays, setPadding, setDateDisplay } =
+    useDate(events);
 
   const top = useRef(-1);
   const bottom = useRef(1);
@@ -46,9 +47,18 @@ const App = () => {
     });
   };
 
+  const monthChangeCallback = async (entries) => {
+    entries.forEach((element) => {
+      if (element.isIntersecting) {
+        const dateString = element.target.classList[1].split("_").join(" ");
+        setDateDisplay(dateString);
+      }
+    });
+  };
+
   const topObserver = new IntersectionObserver(topCallback, {
     root: document.querySelector(".calendar"),
-    rootMargin: "200px 0px 0px 0px",
+    rootMargin: "100px 0px 0px 0px",
   });
 
   const bottomObserver = new IntersectionObserver(bottomCallback, {
@@ -56,8 +66,14 @@ const App = () => {
     rootMargin: "0px 0px -10px 0px",
   });
 
+  const monthChangeObserver = new IntersectionObserver(monthChangeCallback, {
+    root: document.querySelector(".calendar"),
+    rootMargin: "200px 0px 200px 0px",
+  });
+
   useEffect(() => {
     let elements = document.querySelectorAll(".day");
+    let firstDays = document.querySelectorAll(".one");
     if (elements[0] && elements.length < 100) {
       let currentDayElem = document.querySelector(".currentDay");
       currentDayElem && currentDayElem.scrollIntoView();
@@ -66,11 +82,15 @@ const App = () => {
     if (elements[0]) {
       topObserver.observe(elements[0]);
       bottomObserver.observe(elements[elements.length - 1]);
+      firstDays.forEach((el) => {
+        monthChangeObserver.observe(el);
+      });
     }
 
     return () => {
       topObserver.disconnect();
       bottomObserver.disconnect();
+      monthChangeObserver.disconnect();
     };
   }, [days]);
 

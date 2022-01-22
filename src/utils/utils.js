@@ -34,6 +34,13 @@ export function generateDates(weekdays, nav, daysArr, events, setPadding) {
         isCurrentDay:
           i - paddingDays === day && new Date().getMonth() === month,
         date: dayString,
+        month:
+          i == paddingDays + 1
+            ? firstDayOfMonth.toLocaleDateString("en-us", {
+                month: "short",
+                year: "numeric",
+              })
+            : "",
       });
     } else if (i <= paddingDays && setPadding) {
       daysArr.push({

@@ -31,5 +31,6 @@ export const useDate = (events) => {
     days,
     dateDisplay,
     setDays,
+    setDateDisplay,
   };
 };
