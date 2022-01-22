@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import "./Day.scss";
+
 const Day = ({ day, onClick }) => {
   const className = `day${day.value === "padding" ? " padding" : ""}${
     day.isCurrentDay ? " currentDay" : ""

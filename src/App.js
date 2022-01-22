@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 
 import CalendarHeader from "components/CalendarHeader/CalendarHeader";
+import DateMarker from "components/DateMarker/DateMarker";
 import Day from "components/Day/Day";
 import NewEventModal from "components/NewEventModal/NewEventModal";
 import { useDate } from "Hooks/useDate";
@@ -50,8 +51,11 @@ const App = () => {
   const monthChangeCallback = async (entries) => {
     entries.forEach((element) => {
       if (element.isIntersecting) {
+        let marker = document.querySelector(".marker");
+        marker.style.display = "block";
         const dateString = element.target.classList[1].split("_").join(" ");
         setDateDisplay(dateString);
+        setTimeout(() => (marker.style.display = "none"), 800);
       }
     });
   };
@@ -68,7 +72,7 @@ const App = () => {
 
   const monthChangeObserver = new IntersectionObserver(monthChangeCallback, {
     root: document.querySelector(".calendar"),
-    rootMargin: "200px 0px 200px 0px",
+    rootMargin: "-250px 0px -250px 0px",
   });
 
   useEffect(() => {
@@ -110,6 +114,7 @@ const App = () => {
               }}
             />
           ))}
+          <DateMarker dateDisplay={dateDisplay} />
         </div>
       </div>
 

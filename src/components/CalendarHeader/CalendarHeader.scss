@@ -8,6 +8,15 @@
   justify-content: space-between;
   color: $text-dark-gray;
 
+  p {
+    margin: 0px;
+    color: black;
+
+    & > span {
+      color: cadetblue;
+    }
+  }
+
   .monthDisplay {
     span {
       font-weight: bold;
@@ -22,7 +31,7 @@
   margin-bottom: 10px;
 
   div {
-    width: calc(( 100vw - 40px )/7);
+    width: calc((100vw - 40px) / 7);
     padding: 10px;
     font-weight: bold;
   }

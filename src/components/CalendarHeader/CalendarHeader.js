@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import styles from "./CalendarHeader.module.scss";
+import "./CalendarHeader.scss";
 
 const CalendarHeader = ({ dateDisplay }) => {
   const dateAsArr = dateDisplay.split(" ");
@@ -10,15 +10,15 @@ const CalendarHeader = ({ dateDisplay }) => {
 
   return (
     <>
-      <div className={styles.header}>
+      <div className="header">
         <p>
           <span>my</span> hair dairy
         </p>
-        <div className={styles.monthDisplay}>
+        <div className="monthDisplay">
           <span>{month}</span> {year}
         </div>
       </div>
-      <div className={styles.weekdays}>
+      <div className="weekdays">
         <div>S</div>
         <div>M</div>
         <div>T</div>
