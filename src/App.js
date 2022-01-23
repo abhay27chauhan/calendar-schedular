@@ -12,7 +12,7 @@ import { url, weekdays } from "utils/constants";
 import "./styles/main.scss";
 
 const App = () => {
-  useFetch(url);
+  const [result] = useFetch(url);
   const [clicked, setClicked] = useState();
   const [events, setEvents] = useState([]);
   const { days, dateDisplay, padding, setDays, setPadding, setDateDisplay } =
@@ -72,8 +72,12 @@ const App = () => {
 
   const monthChangeObserver = new IntersectionObserver(monthChangeCallback, {
     root: document.querySelector(".calendar"),
-    rootMargin: "-250px 0px -250px 0px",
+    rootMargin: "-100px 0px -300px 0px",
   });
+
+  useEffect(() => {
+    result && setEvents(result);
+  }, [result]);
 
   useEffect(() => {
     let elements = document.querySelectorAll(".day");

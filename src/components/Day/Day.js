@@ -9,9 +9,13 @@ const Day = ({ day, onClick }) => {
   }${day.month ? ` ${day.month.split(" ").join("_")} one` : ""}`;
   return (
     <div onClick={onClick} className={className}>
-      {day.value === "padding" ? "" : day.value}
+      <p>{day.value === "padding" ? "" : day.value}</p>
 
-      {day.event && <div className="event">{day.event.title}</div>}
+      {day.event && typeof day.event.media == "object" && (
+        <div className="event">
+          <img src={day.event.media[0].mediaurl}></img>
+        </div>
+      )}
     </div>
   );
 };

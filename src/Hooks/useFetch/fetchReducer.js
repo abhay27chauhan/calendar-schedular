@@ -10,8 +10,17 @@ const fetchReducer = (state, action) => {
   }
 
   if (action.type === RESPONSE_COMPLETE) {
+    let posts = action.payload.response.map((obj) => {
+      let date = new Date(obj.calendardatetime);
+      const day = date.getDate();
+      const month = date.getMonth();
+      const year = date.getFullYear();
+      const dayString = `${month + 1}/${day}/${year}`;
+      obj["date"] = dayString;
+      return obj;
+    });
     return {
-      result: action.payload.response,
+      result: posts,
       loading: false,
       error: null,
     };
