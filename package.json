@@ -2,7 +2,7 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://github.com/abhay27chauhan/calendar-schedular",
+  "homepage": "https://abhay27chauhan.github.io/calendar-schedular",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
