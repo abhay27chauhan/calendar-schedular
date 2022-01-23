@@ -1,9 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import "./Day.scss";
 import NameInitials from "components/styledComponents/NameInitials";
 import ConvertNameInitials from "utils/ConvertNameInitials";
+import Rating from "components/Rating/Rating";
+
+import "./Day.scss";
 
 const Day = ({ day, onClick }) => {
   const className = `day${day.value === "padding" ? " padding" : ""}${
@@ -16,6 +18,9 @@ const Day = ({ day, onClick }) => {
 
       {day.event && typeof day.event.media == "object" && (
         <>
+          <div className="rating-container">
+            <Rating rating={day.event.rating || 0} maxRating={5} size={10} />
+          </div>
           <div className="event">
             <img src={day.event.media[0].mediaurl}></img>
           </div>

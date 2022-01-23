@@ -36,6 +36,13 @@
     }
   }
 
+  .rating-container {
+    position: absolute;
+    top: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
   .legends {
     display: flex;
     gap: 10px;
