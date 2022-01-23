@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import CalendarHeader from "components/CalendarHeader/CalendarHeader";
 import DateMarker from "components/DateMarker/DateMarker";
 import Day from "components/Day/Day";
-import NewEventModal from "components/NewEventModal/NewEventModal";
+import Modal from "components/Modal/Modal";
 import { useDate } from "Hooks/useDate";
 import useFetch from "Hooks/useFetch/useFetch";
 import { generateDates } from "utils/utils";
@@ -13,15 +13,13 @@ import "./styles/main.scss";
 
 const App = () => {
   const [result] = useFetch(url);
-  const [clicked, setClicked] = useState();
+  const [clicked, setClicked] = useState(null);
   const [events, setEvents] = useState([]);
   const { days, dateDisplay, padding, setDays, setPadding, setDateDisplay } =
     useDate(events);
 
   const top = useRef(-1);
   const bottom = useRef(1);
-
-  const eventForDate = (date) => events.find((e) => e.date === date);
 
   const topCallback = async (entries) => {
     entries.forEach((element) => {
@@ -113,7 +111,7 @@ const App = () => {
               day={d}
               onClick={() => {
                 if (d.value !== "padding") {
-                  setClicked(d.date);
+                  setClicked(d.event.media);
                 }
               }}
             />
@@ -122,15 +120,7 @@ const App = () => {
         </div>
       </div>
 
-      {clicked && !eventForDate(clicked) && (
-        <NewEventModal
-          onClose={() => setClicked(null)}
-          onSave={(title) => {
-            setEvents([...events, { title, date: clicked }]);
-            setClicked(null);
-          }}
-        />
-      )}
+      {clicked && <Modal media={clicked} onClose={() => setClicked(null)} />}
     </>
   );
 };
