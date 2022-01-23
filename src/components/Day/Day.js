@@ -10,7 +10,9 @@ import "./Day.scss";
 const Day = ({ day, onClick }) => {
   const className = `day${day.value === "padding" ? " padding" : ""}${
     day.isCurrentDay ? " currentDay" : ""
-  }${day.month ? ` ${day.month.split(" ").join("_")} one` : ""}`;
+  }${day.month ? ` ${day.month.split(" ").join("_")}` : ""}${
+    day.one ? " one" : ""
+  }`;
 
   return (
     <div className={className}>

@@ -20,6 +20,7 @@ const App = () => {
 
   const top = useRef(-1);
   const bottom = useRef(1);
+  const lastActive = useRef(null);
 
   const topCallback = async (entries) => {
     entries.forEach((element) => {
@@ -52,6 +53,14 @@ const App = () => {
         let marker = document.querySelector(".marker");
         marker.style.display = "block";
         const dateString = element.target.classList[1].split("_").join(" ");
+        let ptags = document.querySelectorAll(
+          `.${element.target.classList[1]} p`,
+        );
+        if (lastActive.current) {
+          lastActive.current.forEach((p) => (p.style.color = "#9eaab7"));
+        }
+        ptags.forEach((p) => (p.style.color = "#323232"));
+        lastActive.current = ptags;
         setDateDisplay(dateString);
         setTimeout(() => (marker.style.display = "none"), 800);
       }

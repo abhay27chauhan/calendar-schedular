@@ -1,3 +1,5 @@
+@import "styles/variables";
+
 .day {
   width: calc((100vw - 40px) / 7);
   padding: 10px 0px;
@@ -5,7 +7,7 @@
   cursor: pointer;
   box-sizing: border-box;
   background-color: white;
-  box-shadow: 0px 0px 3px #cbd4c2;
+  box-shadow: 0px 0px 3px $box-shadow-color;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -14,10 +16,11 @@
   p {
     margin: 0px;
     text-align: center;
+    color: $text-light-gray;
   }
 
   &:hover {
-    background-color: #e8faed;
+    background-color: $background-color-1;
   }
 
   .event {
@@ -57,7 +60,7 @@
 }
 
 .day + .currentDay {
-  background-color: #e8f4fa;
+  background-color: $background-color-2;
 }
 
 .padding {
